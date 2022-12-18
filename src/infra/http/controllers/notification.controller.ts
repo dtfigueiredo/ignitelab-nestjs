@@ -3,6 +3,7 @@ import { SendNotification } from '@app/use-cases/send-notification';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { CreateNotificationBody } from '../dtos/create-notification.dto';
+import { NotificationViewMapper } from '../views/notification-view-mapper';
 
 @Controller('notifications')
 export class NotificationController {
@@ -32,24 +33,12 @@ export class NotificationController {
       recipientId,
     });
 
+    //implementando o mapper para conversão dos dados no formato de exportação para consumo
+    const rawNotification = NotificationViewMapper.toHttp(notification)
+
     return {
       message: `Notification created successfully.`,
-      data: notification,
+      notification: rawNotification,
     };
   }
-
-  // @Post()
-  // create(body: CreateNotificationBody) {
-  //   return this.notificationService.create(body);
-  // }
-
-  // @Put()
-  // update(body: UpdateNotificationBody) {
-  //   return this.notificationService.update(body);
-  // }
-
-  // @Delete()
-  // remove(body: DeleteNotificationBody) {
-  //   return this.notificationService.remove(body);
-  // }
 }

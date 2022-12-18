@@ -13,43 +13,4 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
       await app.close();
     });
   }
-
-  // async findAll() {
-  //   return await this.notification.findMany();
-  // }
-
-  // async create(body: CreateNotificationBody) {
-  //   await this.notification.create({ data: body });
-  //   return {
-  //     message: `Notification created successfully!`,
-  //     data: body,
-  //   };
-  // }
-
-  // async update(body: UpdateNotificationBody) {
-  //   const notification = await this.notification.findUnique({
-  //     where: { id: body.id },
-  //   });
-
-  //   if (!notification) return;
-
-  //   await this.notification.update({
-  //     where: { id: notification.id },
-  //     data: {
-  //       readAt: null,
-  //     },
-  //   });
-
-  //   return {
-  //     message: `Notification updated successfully!`,
-  //     new_data: notification,
-  //   };
-  // }
-
-  // async remove(body: DeleteNotificationBody) {
-  //   await this.notification.delete({ where: { id: body.id } });
-  //   return {
-  //     message: `Notification deleted successfully!`,
-  //   };
-  // }
 }
