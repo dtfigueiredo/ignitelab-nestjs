@@ -1,4 +1,5 @@
 import { Notification } from '@app/entities/notification/notification';
+import { RecipientId } from '@app/entities/notification/recipientId';
 import { NotificationsRepository } from '@app/repositories/notifications-repository';
 import { Injectable } from '@nestjs/common';
 
@@ -33,7 +34,17 @@ export class PrismaNotificationsRepository implements NotificationsRepository {
       }
     })
 
-    return null
+    if (!notification) {
+      return null
+    }
+
+    return null //VERIFICAR
+  }
+
+  //countByRecipientId
+  async countManyByRecipientId(recipientId: RecipientId): Promise<number> {
+    const notificationsCount = await this.prismaService.notification.findMany({ where: { recipientId: recipientId.value } })
+    return notificationsCount.length
   }
 
   //update

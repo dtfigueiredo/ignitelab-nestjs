@@ -1,10 +1,5 @@
 //VERIFICAR PATH TESTE
-import { Category } from '../../app/entities/notification/category';
-import { Content } from '../../app/entities/notification/content';
-import { Notification } from '../../app/entities/notification/notification';
-import { RecipientId } from '../../app/entities/notification/recipientId';
-import { randomUUID } from 'node:crypto';
-
+import { makeNotification } from '../../../test/factories/notification-factory';
 import { InMemoryNotificationsRepository } from '../../../test/repositories/in-memory-notifications-repository';
 import { CancelNotification } from './cancel-notification';
 import { NotificationNotFound } from './errors/notification-not-found';
@@ -17,11 +12,7 @@ describe('Cancel Notification', () => {
     // UTILIZANDO O CONCEITO DE INVERSÃO DE DEPENDÊNCIAS PARA DIZER AO CASO DE USO QUAL É A DEPENDÊNCIA QUE ELE PRECISA. NO CASO O REPOSITÓRIO QUE FARÁ A COMUNICAÇAÕ COM O BANCO DE DADOS
     const cancelNotification = new CancelNotification(inMemoryRepository);
 
-    const notification = new Notification({
-      category: new Category('Category'),
-      recipientId: new RecipientId(randomUUID()),
-      content: new Content('Novo conteúdo de testes')
-    })
+    const notification = makeNotification()
 
     await inMemoryRepository.create(notification)
 
